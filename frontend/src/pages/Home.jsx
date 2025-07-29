@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { userDataContext } from '../context/userContext'
+import { userDataContext } from '../context/UserContext.jsx'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import aiImg from "../assets/ai.gif"
@@ -92,6 +92,7 @@ synth.speak(utterence);
       const query = encodeURIComponent(userInput);
       window.open(`https://www.youtube.com/results?search_query=${query}`, '_blank');
     }
+    
 
   }
 
@@ -177,11 +178,13 @@ useEffect(() => {
   };
 
 
-    const greeting = new SpeechSynthesisUtterance(`Hello ${userData.name}, what can I help you with?`);
-    greeting.lang = 'hi-IN';
+    // const greeting = new SpeechSynthesisUtterance(`Hello ${userData.name}, what can I help you with?`);
+    // greeting.lang = 'hi-IN';
    
-    window.speechSynthesis.speak(greeting);
+    // window.speechSynthesis.speak(greeting);
  
+    speak(`Hello ${userData.name}, what can I help you with?`);
+
 
   return () => {
     isMounted = false;
@@ -196,7 +199,7 @@ useEffect(() => {
 
 
   return (
-    <div className='w-full h-[100vh] bg-gradient-to-t from-[black] to-[#02023d] flex justify-center items-center flex-col gap-[15px]'>
+    <div className='w-full h-[100vh] bg-gradient-to-t from-[black] to-[#02023d] flex justify-center items-center flex-col gap-[15px] overflow-hidden'>
       <CgMenuRight className='lg:hidden text-white absolute top-[20px] right-[20px] w-[25px] h-[25px]' onClick={()=>setHam(true)}/>
       <div className={`absolute lg:hidden top-0 w-full h-full bg-[#00000053] backdrop-blur-lg p-[20px] flex flex-col gap-[20px] items-start ${ham?"translate-x-0":"translate-x-full"} transition-transform`}>
  <RxCross1 className=' text-white absolute top-[20px] right-[20px] w-[25px] h-[25px]' onClick={()=>setHam(false)}/>
@@ -207,8 +210,8 @@ useEffect(() => {
 <h1 className='text-white font-semibold text-[19px]'>History</h1>
 
 <div className='w-full h-[400px] gap-[20px] overflow-y-auto flex flex-col truncate'>
-  {userData.history?.map((his)=>(
-    <div className='text-gray-200 text-[18px] w-full h-[30px]  '>{his}</div>
+  {userData.history?.map((his,i)=>(
+    <div className='text-gray-200 text-[18px] w-full h-[30px]  ' key={i}>{his}</div>
   ))}
 
 </div>

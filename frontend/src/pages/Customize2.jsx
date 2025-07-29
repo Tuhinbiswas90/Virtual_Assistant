@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react'
-import { userDataContext } from '../context/userContext'
+import { userDataContext } from '../context/UserContext'
 import axios from 'axios'
 import { MdKeyboardBackspace } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 function Customize2() {
     const {userData,backendImage,selectedImage,serverUrl,setUserData}=useContext(userDataContext)
-    const [assistantName,setAssistantName]=useState(userData?.AssistantName || "")
+    const [assistantName,setAssistantName]=useState(userData?.assistantName || "")
     const [loading,setLoading]=useState(false)
     const navigate=useNavigate()
 
@@ -13,6 +13,7 @@ function Customize2() {
         setLoading(true)
         try {
             let formData=new FormData()
+            // formData.append("userId", userData?._id);
             formData.append("assistantName",assistantName)
             if(backendImage){
                  formData.append("assistantImage",backendImage)

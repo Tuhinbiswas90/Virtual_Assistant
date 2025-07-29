@@ -50,7 +50,7 @@ export const askToAssistant=async (req,res)=>{
 
       const jsonMatch=result.match(/{[\s\S]*}/)
       if(!jsonMatch){
-         return res.ststus(400).json({response:"sorry, i can't understand"})
+         return res.status(400).json({response:"sorry, i can't understand"})
       }
       const gemResult=JSON.parse(jsonMatch[0])
       console.log(gemResult)
